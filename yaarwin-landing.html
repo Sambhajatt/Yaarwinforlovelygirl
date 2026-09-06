@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yaarwin - India's Best Prediction & Gaming Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a12;
+    --bg2: #12121f;
+    --card: #1a1a2e;
+    --primary: #00f5a0;
+    --secondary: #00d9f5;
+    --accent: #ff2e63;
+    --gold: #ffd700;
+    --text: #ffffff;
+    --text-muted: #a0a0b8;
+    --gradient: linear-gradient(135deg, #00f5a0, #00d9f5);
+    --gradient2: linear-gradient(135deg, #ff2e63, #ff8a00);
+    --shadow: 0 0 30px rgba(0,245,160,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Animated background */
+  .bg-orbs {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    animation: float 12s ease-in-out infinite;
+  }
+  .orb1 { width: 400px; height: 400px; background: var(--primary); top: -100px; left: -100px; }
+  .orb2 { width: 350px; height: 350px; background: var(--secondary); bottom: -80px; right: -80px; animation-delay: -4s; }
+  .orb3 { width: 250px; height: 250px; background: var(--accent); top: 40%; left: 50%; animation-delay: -7s; }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(40px,-30px) scale(1.05); }
+    66% { transform: translate(-30px,40px) scale(0.95); }
+  }
+
+  /* Header */
+  header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 5%;
+    background: rgba(10,10,18,0.75);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 900;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+  }
+  .logo span { color: var(--gold); -webkit-text-fill-color: var(--gold); }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 70px 5% 50px;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(0,245,160,0.12);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 18px;
+  }
+  .hero h1 .highlight {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    max-width: 620px;
+    margin: 0 auto 35px;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+  /* CTA Buttons */
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+  }
+  .btn-primary {
+    background: var(--gradient);
+    color: #0a0a12;
+    box-shadow: var(--shadow);
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 0 40px rgba(0,245,160,0.45);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 2px solid var(--primary);
+  }
+  .btn-outline:hover {
+    background: rgba(0,245,160,0.1);
+    transform: translateY(-3px);
+  }
+  .btn-telegram {
+    background: linear-gradient(135deg, #0088cc, #00aaff);
+    color: #fff;
+  }
+  .btn-telegram:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0,136,204,0.4);
+  }
+  .btn-channel {
+    background: var(--gradient2);
+    color: #fff;
+  }
+  .btn-channel:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(255,46,99,0.4);
+  }
+
+  /* Stats */
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+  }
+  .stat {
+    text-align: center;
+    min-width: 120px;
+  }
+  .stat .num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat .label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 4px;
+  }
+
+  /* Features */
+  .section {
+    position: relative;
+    z-index: 5;
+    padding: 60px 5%;
+  }
+  .section-title {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+  }
+  .section-title span {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .feature-card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 28px 22px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .feature-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(0,245,160,0.12);
+  }
+  .feature-icon {
+    font-size: 2.4rem;
+    margin-bottom: 14px;
+  }
+  .feature-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+  .feature-card p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  /* Games */
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 18px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .game-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 22px 14px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.3s;
+  }
+  .game-card:hover {
+    border-color: var(--secondary);
+    transform: scale(1.05);
+  }
+  .game-card .gicon { font-size: 2.2rem; margin-bottom: 10px; }
+  .game-card h4 { font-size: 0.95rem; }
+
+  /* Info bar */
+  .info-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .info-item {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .info-item .ival {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .info-item .ilabel {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 40px 5% 80px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* Hidden Admin Trigger */
+  #admin-trigger {
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+    z-index: 9999;
+    opacity: 0.25;
+    transition: opacity 0.3s;
+  }
+  #admin-trigger:hover { opacity: 0.7; background: rgba(255,255,255,0.1); }
+
+  /* Admin Panel */
+  #admin-panel {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  #admin-panel.open { display: flex; }
+  .admin-box {
+    background: #1a1a2e;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 520px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid rgba(0,245,160,0.3);
+    box-shadow: 0 0 50px rgba(0,245,160,0.15);
+  }
+  .admin-box h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: var(--primary);
+  }
+  .admin-section {
+    margin-bottom: 22px;
+  }
+  .admin-section h3 {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    color: var(--secondary);
+  }
+  .admin-section label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    margin-top: 10px;
+  }
+  .admin-section input[type="text"],
+  .admin-section input[type="color"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: #12121f;
+    color: #fff;
+    font-size: 0.9rem;
+    font-family: inherit;
+  }
+  .admin-section input[type="color"] {
+    height: 42px;
+    padding: 4px;
+    cursor: pointer;
+  }
+  .color-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .admin-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .admin-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+  .admin-save {
+    background: var(--gradient);
+    color: #0a0a12;
+  }
+  .admin-close {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+  }
+  .admin-reset {
+    background: rgba(255,46,99,0.2);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .edit-mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 12px;
+    background: rgba(0,245,160,0.08);
+    border-radius: 10px;
+  }
+  .edit-mode-toggle input { width: 18px; height: 18px; accent-color: var(--primary); }
+
+  /* Editable mode styles */
+  body.edit-mode [contenteditable="true"] {
+    outline: 2px dashed rgba(0,245,160,0.5);
+    outline-offset: 4px;
+    cursor: text;
+    min-height: 1em;
+  }
+  body.edit-mode .draggable {
+    cursor: grab;
+    position: relative;
+  }
+  body.edit-mode .draggable:active { cursor: grabbing; }
+  body.edit-mode .draggable::after {
+    content: '⋮⋮';
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 0.7rem;
+    color: var(--primary);
+    opacity: 0.6;
+  }
+
+  /* Pencil floating button when edit mode */
+  #pencil-btn {
+    display: none;
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--gradient);
+    color: #0a0a12;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    z-index: 9998;
+    box-shadow: 0 4px 20px rgba(0,245,160,0.4);
+    align-items: center;
+    justify-content: center;
+  }
+  body.edit-mode #pencil-btn { display: flex; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 50px 4% 40px; }
+    .cta-group { flex-direction: column; align-items: stretch; }
+    .btn { justify-content: center; }
+    .stats { gap: 18px; }
+    .color-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+<header>
+  <div class="logo" data-edit="logo">YAAR<span>WIN</span></div>
+</header>
+
+<section class="hero">
+  <div class="badge" data-edit="badge">🇮🇳 India's Trusted Gaming Platform</div>
+  <h1 data-edit="hero-title">Play. Predict. <span class="highlight">Win Big</span> on Yaarwin</h1>
+  <p data-edit="hero-desc">100+ exciting games including Colour Prediction, Slots, Aviator, K3, 5D & more. Instant UPI deposits, fast withdrawals & USDT support. Start with just ₹100!</p>
+
+  <div class="cta-group" id="cta-group">
+    <a href="https://22yaarwin.com/#/register?invitationCode=431625555901" class="btn btn-primary draggable" id="btn-register" data-link="register" target="_blank" rel="noopener">
+      🚀 Register Now
+    </a>
+    <a href="https://22yaarwin.com/#/register?invitationCode=431625555901" class="btn btn-outline draggable" id="btn-login" data-link="login" target="_blank" rel="noopener">
+      🔑 Login
+    </a>
+  </div>
+
+  <div class="cta-group" id="cta-group-2">
+    <a href="https://t.me/Krishna_181" class="btn btn-telegram draggable" id="btn-cs" data-link="cs" target="_blank" rel="noopener">
+      💬 Contact Customer Service
+    </a>
+    <a href="https://t.me/sureshotpredictio5" class="btn btn-channel draggable" id="btn-channel" data-link="channel" target="_blank" rel="noopener">
+      📢 Subscribe Official Prediction
+    </a>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="num" data-edit="stat1-num">100+</div>
+      <div class="label" data-edit="stat1-label">Games</div>
+    </div>
+    <div class="stat">
+      <div class="num" data-edit="stat2-num">₹100</div>
+      <div class="label" data-edit="stat2-label">Min Deposit</div>
+    </div>
+    <div class="stat">
+      <div class="num" data-edit="stat3-num">₹110</div>
+      <div class="label" data-edit="stat3-label">Min Withdrawal</div>
+    </div>
+    <div class="stat">
+      <div class="num" data-edit="stat4-num">USDT</div>
+      <div class="label" data-edit="stat4-label">Crypto Support</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title" data-edit="features-title">Why Choose <span>Yaarwin</span>?</h2>
+  <div class="features" id="features">
+    <div class="feature-card draggable">
+      <div class="feature-icon">🎨</div>
+      <h3 data-edit="f1-title">Colour Prediction</h3>
+      <p data-edit="f1-desc">Predict Red, Green or Violet every 30 seconds. Instant results & high payouts up to 9x.</p>
+    </div>
+    <div class="feature-card draggable">
+      <div class="feature-icon">🎰</div>
+      <h3 data-edit="f2-title">100+ Slots & Casino</h3>
+      <p data-edit="f2-desc">JILI, CQ9, JDB slots, fishing games, live casino & more. Endless entertainment.</p>
+    </div>
+    <div class="feature-card draggable">
+      <div class="feature-icon">✈️</div>
+      <h3 data-edit="f3-title">Aviator & Crash</h3>
+      <p data-edit="f3-desc">Cash out at the perfect moment. Multipliers keep climbing — timing is everything!</p>
+    </div>
+    <div class="feature-card draggable">
+      <div class="feature-icon">⚡</div>
+      <h3 data-edit="f4-title">Fast Withdrawals</h3>
+      <p data-edit="f4-desc">Min ₹110. UPI, Bank & USDT. Most withdrawals processed within minutes.</p>
+    </div>
+    <div class="feature-card draggable">
+      <div class="feature-icon">💰</div>
+      <h3 data-edit="f5-title">Low Entry</h3>
+      <p data-edit="f5-desc">Start playing with just ₹100 deposit via UPI, PhonePe, GPay or USDT.</p>
+    </div>
+    <div class="feature-card draggable">
+      <div class="feature-icon">🔒</div>
+      <h3 data-edit="f6-title">Secure & Fair</h3>
+      <p data-edit="f6-desc">SSL encrypted. Fair RNG results. 24/7 customer support via Telegram.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:20px;">
+  <h2 class="section-title" data-edit="games-title">Popular <span>Games</span></h2>
+  <div class="games-grid">
+    <div class="game-card"><div class="gicon">🟢</div><h4 data-edit="g1">WinGo</h4></div>
+    <div class="game-card"><div class="gicon">🎲</div><h4 data-edit="g2">K3 Lottery</h4></div>
+    <div class="game-card"><div class="gicon">🔢</div><h4 data-edit="g3">5D</h4></div>
+    <div class="game-card"><div class="gicon">✈️</div><h4 data-edit="g4">Aviator</h4></div>
+    <div class="game-card"><div class="gicon">🎰</div><h4 data-edit="g5">Slots</h4></div>
+    <div class="game-card"><div class="gicon">🐟</div><h4 data-edit="g6">Fishing</h4></div>
+    <div class="game-card"><div class="gicon">🃏</div><h4 data-edit="g7">Teen Patti</h4></div>
+    <div class="game-card"><div class="gicon">🎯</div><h4 data-edit="g8">Plinko</h4></div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:10px;">
+  <div class="info-bar">
+    <div class="info-item">
+      <div>
+        <div class="ival" data-edit="info1-val">₹100</div>
+        <div class="ilabel" data-edit="info1-label">Minimum Deposit</div>
+      </div>
+    </div>
+    <div class="info-item">
+      <div>
+        <div class="ival" data-edit="info2-val">₹110</div>
+        <div class="ilabel" data-edit="info2-label">Minimum Withdrawal</div>
+      </div>
+    </div>
+    <div class="info-item">
+      <div>
+        <div class="ival" data-edit="info3-val">USDT</div>
+        <div class="ilabel" data-edit="info3-label">Crypto Withdrawal</div>
+      </div>
+    </div>
+    <div class="info-item">
+      <div>
+        <div class="ival" data-edit="info4-val">24/7</div>
+        <div class="ilabel" data-edit="info4-label">Support Available</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p data-edit="footer">© 2026 Yaarwin. Play responsibly. 18+ only. This is a promotional landing page.</p>
+</footer>
+
+<!-- Hidden Admin Trigger -->
+<button id="admin-trigger" title="Admin"></button>
+
+<!-- Pencil button (visible in edit mode) -->
+<button id="pencil-btn" title="Toggle Edit Mode">✏️</button>
+
+<!-- Admin Panel -->
+<div id="admin-panel">
+  <div class="admin-box">
+    <h2>⚙️ Admin Panel</h2>
+
+    <div class="edit-mode-toggle">
+      <input type="checkbox" id="edit-mode-check">
+      <label for="edit-mode-check" style="margin:0;color:#fff;font-size:0.95rem;">Enable Text Edit & Drag Mode</label>
+    </div>
+
+    <div class="admin-section">
+      <h3>🔗 Button Redirect Links</h3>
+      <label>Register Button URL</label>
+      <input type="text" id="link-register" value="https://22yaarwin.com/#/register?invitationCode=431625555901">
+      <label>Login Button URL</label>
+      <input type="text" id="link-login" value="https://22yaarwin.com/#/register?invitationCode=431625555901">
+      <label>Customer Service URL</label>
+      <input type="text" id="link-cs" value="https://t.me/Krishna_181">
+      <label>Prediction Channel URL</label>
+      <input type="text" id="link-channel" value="https://t.me/sureshotpredictio5">
+    </div>
+
+    <div class="admin-section">
+      <h3>🎨 UI Colours</h3>
+      <div class="color-row">
+        <div>
+          <label>Primary (Green)</label>
+          <input type="color" id="color-primary" value="#00f5a0">
+        </div>
+        <div>
+          <label>Secondary (Cyan)</label>
+          <input type="color" id="color-secondary" value="#00d9f5">
+        </div>
+        <div>
+          <label>Accent (Pink)</label>
+          <input type="color" id="color-accent" value="#ff2e63">
+        </div>
+        <div>
+          <label>Background</label>
+          <input type="color" id="color-bg" value="#0a0a12">
+        </div>
+        <div>
+          <label>Card Background</label>
+          <input type="color" id="color-card" value="#1a1a2e">
+        </div>
+        <div>
+          <label>Gold / Highlight</label>
+          <input type="color" id="color-gold" value="#ffd700">
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-actions">
+      <button class="admin-btn admin-save" id="admin-save">💾 Save Changes</button>
+      <button class="admin-btn admin-reset" id="admin-reset">↺ Reset All</button>
+      <button class="admin-btn admin-close" id="admin-close">✕ Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const DEFAULTS = {
+    links: {
+      register: 'https://22yaarwin.com/#/register?invitationCode=431625555901',
+      login: 'https://22yaarwin.com/#/register?invitationCode=431625555901',
+      cs: 'https://t.me/Krishna_181',
+      channel: 'https://t.me/sureshotpredictio5'
+    },
+    colors: {
+      primary: '#00f5a0',
+      secondary: '#00d9f5',
+      accent: '#ff2e63',
+      bg: '#0a0a12',
+      card: '#1a1a2e',
+      gold: '#ffd700'
+    }
+  };
+
+  // Load saved settings
+  function loadSettings() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('yaarwin_admin') || '{}');
+      return {
+        links: { ...DEFAULTS.links, ...(saved.links || {}) },
+        colors: { ...DEFAULTS.colors, ...(saved.colors || {}) },
+        texts: saved.texts || {},
+        editMode: saved.editMode || false
+      };
+    } catch(e) { return { links: {...DEFAULTS.links}, colors: {...DEFAULTS.colors}, texts: {}, editMode: false }; }
+  }
+
+  function saveSettings(settings) {
+    localStorage.setItem('yaarwin_admin', JSON.stringify(settings));
+  }
+
+  let settings = loadSettings();
+
+  // Apply colors
+  function applyColors(c) {
+    document.documentElement.style.setProperty('--primary', c.primary);
+    document.documentElement.style.setProperty('--secondary', c.secondary);
+    document.documentElement.style.setProperty('--accent', c.accent);
+    document.documentElement.style.setProperty('--bg', c.bg);
+    document.documentElement.style.setProperty('--card', c.card);
+    document.documentElement.style.setProperty('--gold', c.gold);
+    document.documentElement.style.setProperty('--gradient', `linear-gradient(135deg, ${c.primary}, ${c.secondary})`);
+    document.documentElement.style.setProperty('--gradient2', `linear-gradient(135deg, ${c.accent}, #ff8a00)`);
+    document.documentElement.style.setProperty('--shadow', `0 0 30px ${c.primary}40`);
+    document.body.style.background = c.bg;
+  }
+
+  // Apply links
+  function applyLinks(l) {
+    const map = {
+      register: document.getElementById('btn-register'),
+      login: document.getElementById('btn-login'),
+      cs: document.getElementById('btn-cs'),
+      channel: document.getElementById('btn-channel')
+    };
+    for (const [key, el] of Object.entries(map)) {
+      if (el && l[key]) el.href = l[key];
+    }
+  }
+
+  // Apply saved texts
+  function applyTexts(texts) {
+    document.querySelectorAll('[data-edit]').forEach(el => {
+      const key = el.getAttribute('data-edit');
+      if (texts[key] !== undefined) el.innerHTML = texts[key];
+    });
+  }
+
+  // Save all editable texts
+  function collectTexts() {
+    const texts = {};
+    document.querySelectorAll('[data-edit]').forEach(el => {
+      texts[el.getAttribute('data-edit')] = el.innerHTML;
+    });
+    return texts;
+  }
+
+  // Edit mode
+  function setEditMode(on) {
+    document.body.classList.toggle('edit-mode', on);
+    document.querySelectorAll('[data-edit]').forEach(el => {
+      el.contentEditable = on ? 'true' : 'false';
+    });
+    document.getElementById('edit-mode-check').checked = on;
+    settings.editMode = on;
+  }
+
+  // Drag and drop for buttons / cards
+  let dragEl = null;
+  function initDrag() {
+    document.querySelectorAll('.draggable').forEach(el => {
+      el.draggable = true;
+      el.addEventListener('dragstart', e => {
+        if (!document.body.classList.contains('edit-mode')) { e.preventDefault(); return; }
+        dragEl = el;
+        el.style.opacity = '0.5';
+        e.dataTransfer.effectAllowed = 'move';
+      });
+      el.addEventListener('dragend', () => {
+        if (dragEl) dragEl.style.opacity = '1';
+        dragEl = null;
+      });
+      el.addEventListener('dragover', e => {
+        if (!document.body.classList.contains('edit-mode') || !dragEl) return;
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+      });
+      el.addEventListener('drop', e => {
+        if (!document.body.classList.contains('edit-mode') || !dragEl || dragEl === el) return;
+        e.preventDefault();
+        const parent = el.parentNode;
+        const all = [...parent.children];
+        const from = all.indexOf(dragEl);
+        const to = all.indexOf(el);
+        if (from < to) parent.insertBefore(dragEl, el.nextSibling);
+        else parent.insertBefore(dragEl, el);
+      });
+    });
+  }
+
+  // Init
+  applyColors(settings.colors);
+  applyLinks(settings.links);
+  applyTexts(settings.texts);
+  setEditMode(settings.editMode);
+  initDrag();
+
+  // Admin panel
+  const panel = document.getElementById('admin-panel');
+  document.getElementById('admin-trigger').addEventListener('click', () => {
+    // Fill current values
+    document.getElementById('link-register').value = settings.links.register;
+    document.getElementById('link-login').value = settings.links.login;
+    document.getElementById('link-cs').value = settings.links.cs;
+    document.getElementById('link-channel').value = settings.links.channel;
+    document.getElementById('color-primary').value = settings.colors.primary;
+    document.getElementById('color-secondary').value = settings.colors.secondary;
+    document.getElementById('color-accent').value = settings.colors.accent;
+    document.getElementById('color-bg').value = settings.colors.bg;
+    document.getElementById('color-card').value = settings.colors.card;
+    document.getElementById('color-gold').value = settings.colors.gold;
+    panel.classList.add('open');
+  });
+
+  document.getElementById('admin-close').addEventListener('click', () => panel.classList.remove('open'));
+
+  document.getElementById('admin-save').addEventListener('click', () => {
+    settings.links = {
+      register: document.getElementById('link-register').value.trim(),
+      login: document.getElementById('link-login').value.trim(),
+      cs: document.getElementById('link-cs').value.trim(),
+      channel: document.getElementById('link-channel').value.trim()
+    };
+    settings.colors = {
+      primary: document.getElementById('color-primary').value,
+      secondary: document.getElementById('color-secondary').value,
+      accent: document.getElementById('color-accent').value,
+      bg: document.getElementById('color-bg').value,
+      card: document.getElementById('color-card').value,
+      gold: document.getElementById('color-gold').value
+    };
+    settings.texts = collectTexts();
+    settings.editMode = document.getElementById('edit-mode-check').checked;
+
+    applyColors(settings.colors);
+    applyLinks(settings.links);
+    setEditMode(settings.editMode);
+    saveSettings(settings);
+    panel.classList.remove('open');
+    alert('✅ Settings saved! Changes will persist on this browser.');
+  });
+
+  document.getElementById('admin-reset').addEventListener('click', () => {
+    if (!confirm('Reset all settings, texts and colours to default?')) return;
+    localStorage.removeItem('yaarwin_admin');
+    location.reload();
+  });
+
+  document.getElementById('edit-mode-check').addEventListener('change', e => {
+    setEditMode(e.target.checked);
+  });
+
+  // Pencil button toggles edit mode quickly
+  document.getElementById('pencil-btn').addEventListener('click', () => {
+    setEditMode(!document.body.classList.contains('edit-mode'));
+  });
+
+  // Live colour preview
+  ['primary','secondary','accent','bg','card','gold'].forEach(key => {
+    document.getElementById('color-' + key).addEventListener('input', e => {
+      const temp = { ...settings.colors, [key]: e.target.value };
+      applyColors(temp);
+    });
+  });
+
+  // Prevent navigation while editing
+  document.querySelectorAll('a[data-link]').forEach(a => {
+    a.addEventListener('click', e => {
+      if (document.body.classList.contains('edit-mode')) {
+        e.preventDefault();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
